@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Task
+from .forms import TaskForm
 
 def index(request):
     tasks = Task.objects.order_by('-id')
@@ -13,5 +14,19 @@ def my_page(request):
     return render(request, 'main/my_page.html')
 
 def create(request):
-    return render(request, 'main/create.html')
+    error = ''
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+        else:
+            error = 'форма была не верной'
+    form = TaskForm()
+    context = {
+        'form': form,
+        'error': error
+    }
+    return render(request, 'main/create.html', context)
+
 

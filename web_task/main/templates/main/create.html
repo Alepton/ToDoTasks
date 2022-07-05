@@ -8,15 +8,11 @@
 {%block content%}
     <h1>Новая задача</h1>
     <form method="post">
-        <input type="text" placeholder="Введите название задачи" class="form-control"><br>
-        <select class="form-select">
-                <option value="">Выберите категорию</option>
-                <option>Магазин</option>
-                <option>Дела</option>
-                <option>Отдых</option>
-                <option>Дети</option>
-              </select><br>
-        <textarea placeholder="Введите описание задачи" class="form-control"></textarea><br>
+        {% csrf_token %}
+        {{ form.title }}<br>
+        {{ form.task }}<br>
+
         <button type="submit" class="btn btn-success">Добавить</button>
+        <span>{{ error }}</span>
     </form>
 {%endblock%}
