@@ -7,3 +7,7 @@ class Task(models.Model):
         return self.title
     category = models.CharField('Категория', max_length=10, help_text='Укажите категорию задачи')
     curentdate = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name='Задача'
+        verbose_name_plural='Задачи'
