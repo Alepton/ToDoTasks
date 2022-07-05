@@ -3,12 +3,15 @@ from django.http import HttpResponse
 from .models import Task
 
 def index(request):
-    task = Task.objects.all()
-    return render(request, 'main/index.html', {'title': 'Главная страница', 'tasks': task})
+    tasks = Task.objects.order_by('-id')
+    return render(request, 'main/index.html', {'title': 'Главная страница', 'tasks': tasks})
 
 def about(request):
     return render(request, 'main/about.html')
 
 def my_page(request):
     return render(request, 'main/my_page.html')
+
+def create(request):
+    return render(request, 'main/create.html')
 
